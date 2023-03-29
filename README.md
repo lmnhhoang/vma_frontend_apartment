@@ -1,0 +1,1 @@
+# vma_frontend_apartment
