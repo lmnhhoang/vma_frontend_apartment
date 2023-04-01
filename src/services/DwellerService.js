@@ -3,30 +3,35 @@ import http from "../http-common";
 class DwellerService {
 
   getAllDweller() {
-    return http.get('/listCivil');
+    return http.get('/listAllCivil');
   }
 
-  getDwellerById(userId) {
-    return http.get(`/listCivil/${userId}`);
+  getDwellerById(dwellerId) {
+    return http.get(`/listCivil/${dwellerId}`);
   }
 
   createDweller(user) {
     return http.post('/addCivil', user);
   }
 
-  updateDweller(user, userId) {
-    return http.put(`/addCivil/${userId}`, user);
+  updateDweller(user, dwellerId) {
+    return http.put(`/addCivil/${dwellerId}`, user);
   }
 
-  deleteDweller(userId) {
-    return http.delete(`/deleteCivil/${userId}`);
+  deleteDweller(dwellerId) {
+    return http.delete(`/deleteCivil/${dwellerId}`);
   }
 
   findByName(name) {
     return http.get(`/listCivil?title=${name}`);
   }
-  countByBuilding(buildingId){
-    return http.get(`/listCivil?building=${buildingId}`)
+
+  countByApartment(apartmentId) {
+    return http.get(`/countCivil?apartment=${apartmentId}`)
+  }
+
+  getByApartment(apartmentId) {
+    return http.get(`/listCivil?apartment=${apartmentId}`)
   }
 }
 

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import ApartmentService from '../../services/ApartmentService';
-import {withRouter} from "../withRouter";
-import {useLocation} from "react-router-dom";
+import {withRouter} from "../../helpers/withRouter";
 
 class ListApartment extends Component {
 
@@ -22,28 +21,34 @@ class ListApartment extends Component {
   deleteApartment(id) {
     ApartmentService.deleteApartment(id).then(res => {
       this.setState({
-        apartments: this.state.apartments.filter(apartment => apartment.id !== id)
+        apartments: this.state.apartments.filter(
+            apartment => apartment.apartment_id !== id)
       });
     });
   }
 
   viewApartment(id) {
-    this.props.navigate(`/viewApartment/${id}`);
+      this.props.router.navigate(`/viewApartment/${id}?building=${this.state.id}`);
   }
 
   editApartment(id) {
-    this.props.navigate(`/addApartment/${id}`);
+      this.props.router.navigate(`/createApartment/${id}?building=${this.state.id}`);
   }
 
   componentDidMount() {
-    ApartmentService.getAllApartmentinBuilding(this.state.id).then((res) => {
-      console.log(res.data)
-      this.setState({apartments: res.data});
-    });
+    if(this.state.id != null){
+      ApartmentService.getAllApartmentinBuilding(this.state.id).then((res) => {
+        this.setState({apartments: res.data});
+      });
+    } else {
+      ApartmentService.getAllApartment().then((res) => {
+        this.setState({apartments: res.data});
+      });
+    }
   }
 
   addApartment() {
-    this.props.navigate('/addApartment/_add');
+      this.props.router.navigate(`/createApartment/_add?building=${this.state.id}`);
   }
 
   render() {
@@ -62,9 +67,8 @@ class ListApartment extends Component {
           <tr>
             <th> Room</th>
             <th> Acreage (m<sup>2</sup>)</th>
-            <th> Status </th>
-            <th> Number of dwellers </th>
-            <th> Action </th>
+            <th> Status</th>
+            <th> Action</th>
           </tr>
           </thead>
           <tbody>
@@ -73,7 +77,6 @@ class ListApartment extends Component {
                 <td> {apartment.roomNo} </td>
                 <td> {apartment.acreage}</td>
                 <td> {apartment.status}</td>
-                <td> 0 </td>
                 <td>
                   <button onClick={() => this.editApartment(
                       apartment.apartment_id)}

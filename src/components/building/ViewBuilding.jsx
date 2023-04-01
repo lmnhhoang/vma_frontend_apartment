@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import BuildingService from '../../services/BuildingService';
 import ApartmentService from "../../services/ApartmentService";
-import {withRouter} from "../withRouter";
+import {withRouter} from "../../helpers/withRouter";
 
 class ViewBuilding extends Component {
 
@@ -15,7 +15,7 @@ class ViewBuilding extends Component {
   }
 
   viewApartment(id) {
-    this.props.navigate(`/listApartment?building=${id}`);
+      this.props.router.navigate(`/listApartment?building=${id}`);
   }
 
   componentDidMount() {

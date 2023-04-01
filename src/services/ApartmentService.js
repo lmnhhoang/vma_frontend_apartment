@@ -3,8 +3,9 @@ import http from "../http-common";
 class ApartmentService {
 
   getAllApartment() {
-    return http.get('/listApartment');
+    return http.get('/listAll');
   }
+
   getAllApartmentinBuilding(building_id) {
     return http.get(`/listApartment?building=${building_id}`);
   }
@@ -17,7 +18,7 @@ class ApartmentService {
     return http.post('/addApartment', apartment);
   }
 
-  updateBuilding(apartment, ApartmentId) {
+  updateApartment(apartment, ApartmentId) {
     return http.put(`/addApartment/${ApartmentId}`, apartment);
   }
 
@@ -28,8 +29,9 @@ class ApartmentService {
   findApartmentByTitle(name) {
     return http.get(`/listApartment?name=${name}`);
   }
-  countApartmentByBuilding(building_id) {
-    return http.get(`/countApartment?building=${building_id}`);
+
+  countApartmentByBuilding(ApartmentId) {
+    return http.get(`/countApartment?apartment=${ApartmentId}`);
   }
 }
 

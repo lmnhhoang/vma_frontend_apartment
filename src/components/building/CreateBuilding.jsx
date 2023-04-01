@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
 import BuildingService from '../../services/BuildingService';
-import {withRouter} from "../withRouter";
+import {withRouter} from "../../helpers/withRouter";
 
 class CreateBuilding extends Component {
   constructor(props) {
     super(props)
     this.state = {
       // step 2
-      id: this.props.router.params.id,
-      buildingName: '',
+      id: this.props.router.params.id, buildingName: '',
     }
     this.changeBuildingNameHandler = this.changeBuildingNameHandler.bind(this);
   }
@@ -34,12 +33,12 @@ class CreateBuilding extends Component {
 
     // step 5
     if (this.state.id === '_add') {
-      BuildingService.createBuilding().then(res => {
-        this.props.history.push('/addBuilding');
+      BuildingService.createBuilding(building).then(res => {
+          this.props.router.navigate('/addBuilding');
       });
     } else {
       BuildingService.updateBuilding(building, this.state.id).then(res => {
-        this.props.navigate('/addBuilding');
+          this.props.router.navigate('/addBuilding');
       });
     }
   }
@@ -49,7 +48,7 @@ class CreateBuilding extends Component {
   }
 
   cancel() {
-    this.props.navigate('/building');
+      this.props.router.navigate('/building');
   }
 
   getTitle() {
@@ -61,40 +60,36 @@ class CreateBuilding extends Component {
   }
 
   render() {
-    return (
-        <div>
-          <br></br>
-          <div className="container">
-            <div className="row">
-              <div className="card col-md-6 offset-md-3 offset-md-3">
-                {
-                  this.getTitle()
-                }
-                <div className="card-body">
-                  <form>
-                    <div className="form-group">
-                      <label> Building Name: </label>
-                      <input placeholder="Building Name" name="buildingName"
-                             className="form-control"
-                             value={this.state.buildingName}
-                             onChange={this.changeBuildingNameHandler}/>
-                    </div>
-                    <br/>
-                    <button className="btn btn-success"
-                            onClick={this.saveOrUpdateEmployee}>Save
-                    </button>
-                    <button className="btn btn-danger"
-                            onClick={this.cancel.bind(this)}
-                            style={{marginLeft: "10px"}}>Cancel
-                    </button>
-                  </form>
+    return (<div>
+      <br></br>
+      <div className="container">
+        <div className="row">
+          <div className="card col-md-6 offset-md-3 offset-md-3">
+            {this.getTitle()}
+            <div className="card-body">
+              <form>
+                <div className="form-group">
+                  <label> Building Name: </label>
+                  <input placeholder="Building Name" name="buildingName"
+                         className="form-control"
+                         value={this.state.buildingName}
+                         onChange={this.changeBuildingNameHandler}/>
                 </div>
-              </div>
+                <br/>
+                <button className="btn btn-success"
+                        onClick={this.saveOrUpdateEmployee}>Save
+                </button>
+                <button className="btn btn-danger"
+                        onClick={this.cancel.bind(this)}
+                        style={{marginLeft: "10px"}}>Cancel
+                </button>
+              </form>
             </div>
-
           </div>
         </div>
-    )
+
+      </div>
+    </div>)
   }
 }
 

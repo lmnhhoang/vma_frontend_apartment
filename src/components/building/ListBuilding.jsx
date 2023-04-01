@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import BuildingService from '../../services/BuildingService';
-import {withRouter} from "../withRouter";
+import {withRouter} from "../../helpers/withRouter";
 
 class ListBuilding extends Component {
 
@@ -24,11 +24,11 @@ class ListBuilding extends Component {
   }
 
   viewBuilding(id) {
-    this.props.navigate(`/viewBuilding/${id}`);
+    this.props.router.navigate(`/viewBuilding/${id}`);
   }
 
   editBuilding(id) {
-    this.props.navigate(`/addBuilding/${id}`);
+    this.props.router.navigate(`/addBuilding/${id}`);
   }
 
   componentDidMount() {
@@ -38,7 +38,7 @@ class ListBuilding extends Component {
   }
 
   addBuilding() {
-    this.props.navigate('/addBuilding/_add');
+    this.props.router.navigate('/addBuilding/_add');
   }
 
   render() {
