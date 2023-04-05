@@ -2,28 +2,28 @@ import http from "../http-common";
 
 class AprtManageService {
 
-  getAllBuilding() {
-    return http.get('/listMange');
+  getAllManage() {
+    return http.get('/listManage');
   }
 
-  getBuildingById(manageId) {
-    return http.get(`/listMange/${manageId}`);
+  getManageById(manageId) {
+    return http.get(`/listManage/${manageId}`);
   }
 
-  createBuilding(manage) {
+  createManage(manage) {
     return http.post('/addManage', manage);
   }
 
-  updateBuilding(manage, manageId) {
+  updateManage(manage, manageId) {
     return http.put(`/addManage/${manageId}`, manage);
   }
 
-  deleteBuilding(manageId) {
+  deleteManage(manageId) {
     return http.delete(`/deleteManage/${manageId}`);
   }
 
-  findBuildingByTitle(name) {
-    return http.get(`/building?name=${name}`);
+  findManageByTitle(name) {
+    return http.get(`/manage?name=${name}`);
   }
 }
 

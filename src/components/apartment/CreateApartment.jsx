@@ -18,6 +18,7 @@ class CreateApartment extends Component {
       status: '',
       description: '',
       building_id: '',
+      presenter_email: '',
       selectedStatus: 'Trống'
     }
     this.changeRoomNoHandler = this.changeRoomNoHandler.bind(this);
@@ -25,7 +26,8 @@ class CreateApartment extends Component {
     this.changeNumOfRoomHandler = this.changeNumOfRoomHandler.bind(this);
     this.changeStatusHandler = this.changeStatusHandler.bind(this);
     this.changeDescriptionHandler = this.changeDescriptionHandler.bind(this);
-    this.saveOrUpdateApartment = this.saveOrUpdateApartment().bind(this);
+    this.changeEmailHandler = this.changeEmailHandler.bind(this);
+    //this.saveOrUpdateApartment = this.saveOrUpdateApartment().bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +43,7 @@ class CreateApartment extends Component {
           acreage: apartment.acreage,
           numOfRoom: apartment.numOfRoom,
           status: apartment.status,
+          presenter_email: apartment.presenter_email,
           description: apartment.description,
           building_id: apartment.building_id
         });
@@ -55,6 +58,7 @@ class CreateApartment extends Component {
       acreage: this.state.acreage,
       numOfRoom: this.state.numOfRoom,
       status: this.state.status,
+      presenter_email: this.state.presenter_email,
       description: this.state.description,
       building_id: this.state.in_building
     };
@@ -89,7 +93,9 @@ class CreateApartment extends Component {
   changeDescriptionHandler = (event) => {
     this.setState({description: event.target.value});
   }
-
+  changeEmailHandler = (event) => {
+    this.setState({presenter_email: event.target.value})
+  }
   cancel() {
       this.props.router.navigate(`/listApartment?building=${this.state.in_building}`);
   }
@@ -138,6 +144,13 @@ class CreateApartment extends Component {
                          className="form-control"
                          value={this.state.numOfRoom}
                          onChange={this.changeNumOfRoomHandler}/>
+                </div>
+                <div className="form-group">
+                  <label> Presenter email: </label>
+                  <input placeholder="Presenter email" name="numOfRoom"
+                         className="form-control"
+                         value={this.state.presenter_email}
+                         onChange={this.changeEmailHandler}/>
                 </div>
                 <div className="form-group">
                   <label> Status: </label>

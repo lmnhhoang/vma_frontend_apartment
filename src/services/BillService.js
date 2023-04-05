@@ -2,23 +2,23 @@ import http from "../http-common";
 
 class BillService {
 
-  getAllBuilding() {
+  getAllBill() {
     return http.get('/listBill');
   }
 
-  getBuildingById(billId) {
+  getBillById(billId) {
     return http.get(`/listBill/${billId}`);
   }
 
-  createBuilding(bill) {
+  createBill(bill) {
     return http.post('/addBill', bill);
   }
 
-  updateBuilding(bill, billId) {
+  updateBill(bill, billId) {
     return http.put(`/addBuilding/${billId}`, bill);
   }
 
-  deleteBuilding(billId) {
+  deleteBill(billId) {
     return http.delete(`/deleteBuilding/${billId}`);
   }
 

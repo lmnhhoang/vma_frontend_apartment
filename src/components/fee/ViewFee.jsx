@@ -29,8 +29,19 @@ class ViewFee extends Component {
           </div>
           <div className="row">
             <div><label
-                style={{marginRight: 10}}> Value: </label>{this.state.fee.fee_value}
+                style={{marginRight: 10}}> Value: </label>{this.state.fee.fee_value} đ
             </div>
+          </div>
+          <br/>
+          <div className="row row-cols-4">
+            <button onClick={() => this.editFee(this.state.id)}
+                    className="btn btn-secondary">Update
+            </button>
+            <button style={{marginLeft: "10px"}}
+                    onClick={() => this.deleteFee(
+                        this.state.id)}
+                    className="btn btn-danger">Delete
+            </button>
           </div>
         </div>
 

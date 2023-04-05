@@ -42,7 +42,7 @@ class ListFee extends Component {
     return (<div>
       <h2 className="text-center">Fee List</h2>
       <div className="row">
-        <button className="btn btn-primary" onClick={this.addUser}> Add
+        <button className="btn btn-primary" onClick={this.addFee}> Add
           Fee
         </button>
       </div>
@@ -53,7 +53,7 @@ class ListFee extends Component {
           <thead>
           <tr>
             <th> Fee name</th>
-            <th> Value</th>
+            <th> Value (đ)</th>
             <th> Actions</th>
           </tr>
           </thead>
@@ -62,16 +62,16 @@ class ListFee extends Component {
             <td> {fee.fee_type} </td>
             <td> {fee.fee_value} </td>
             <td>
-              <button onClick={() => this.editBuilding(fee.fee_id)}
+              <button onClick={() => this.editFee(fee.fee_id)}
                       className="btn btn-secondary">Update
               </button>
               <button style={{marginLeft: "10px"}}
-                      onClick={() => this.deleteBuilding(
+                      onClick={() => this.deleteFee(
                           fee.fee_id)}
                       className="btn btn-danger">Delete
               </button>
               <button style={{marginLeft: "10px"}}
-                      onClick={() => this.viewBuilding(fee.fee_id)}
+                      onClick={() => this.viewFee(fee.fee_id)}
                       className="btn btn-info">View
               </button>
             </td>
@@ -79,8 +79,9 @@ class ListFee extends Component {
           </tbody>
         </table>
         <br/>
-        <div className="row">
-          <strong>Total Fee: </strong>{this.state.totalFee}
+        <div className="row" style={{display: 'flex'}}>
+          <span><strong>Total Fee: </strong>{this.state.totalFee} đ</span>
+
         </div>
       </div>
 

@@ -34,11 +34,11 @@ class CreateFee extends Component {
     console.log('fee => ' + JSON.stringify(fee));
     if (this.state.id === '_add') {
       FeeService.createFee(fee).then(res => {
-        this.props.router.navigate('/addFee');
+        this.props.router.navigate('/listFee');
       });
     } else {
       FeeService.updateFee(fee, this.state.id).then(res => {
-        this.props.router.navigate('/addFee');
+        this.props.router.navigate('/listFee');
       });
     }
   }

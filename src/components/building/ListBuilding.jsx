@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import BuildingService from '../../services/BuildingService';
 import {withRouter} from "../../helpers/withRouter";
+import AuthService from "../../services/auth/auth.service";
 
 class ListBuilding extends Component {
 
@@ -32,6 +33,14 @@ class ListBuilding extends Component {
   }
 
   componentDidMount() {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      this.setState({
+        currentUser: user,
+        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+      });
+    }
     BuildingService.getAllBuilding().then((res) => {
       this.setState({buildings: res.data});
     });
@@ -44,11 +53,12 @@ class ListBuilding extends Component {
   render() {
     return (<div>
       <h2 className="text-center">Building List</h2>
-      <div className="row">
+      {(this.state.showModeratorBoard || this.state.showAdminBoard) ? (<div
+          className="row">
         <button className="btn btn-primary" onClick={this.addBuilding}> Add
           Building
         </button>
-      </div>
+      </div>) : ('')}
       <br></br>
       <div className="row">
         <table className="table table-striped table-bordered">
@@ -62,18 +72,18 @@ class ListBuilding extends Component {
           <tbody>
           {this.state.buildings.map(building => <tr key={building.building_id}>
             <td> {building.building_name} </td>
-            <td>
+            <td style={{display: "flex"}}>
+              {(this.state.showModeratorBoard || this.state.showAdminBoard) ?(<div>
               <button onClick={() => this.editBuilding(building.building_id)}
                       className="btn btn-secondary">Update
               </button>
-              {/*<button style={{marginLeft: "10px"}}*/}
-              {/*        onClick={() => this.deleteBuilding(*/}
-              {/*            building.building_id)}*/}
-              {/*        className="btn btn-danger">Delete*/}
-              {/*</button>*/}
+              <button style={{marginLeft: "10px"}}
+                      onClick={() => this.deleteBuilding(building.building_id)}
+                      className="btn btn-danger">Delete
+              </button></div>) : ('')}
               <button style={{marginLeft: "10px"}}
                       onClick={() => this.viewBuilding(building.building_id)}
-                      className="btn btn-info">View
+                      className="btn btn-info">View Detail
               </button>
             </td>
           </tr>)}

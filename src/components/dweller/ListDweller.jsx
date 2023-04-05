@@ -44,6 +44,16 @@ class ListDweller extends Component {
   render() {
     return (<div>
       <h2 className="text-center">Dwellers</h2>
+      <div className="row">
+        <div className="input-group rounded">
+          <input type="search" className="form-control rounded"
+                 placeholder="Search Dweller" aria-label="Search"
+                 aria-describedby="search-addon"/>
+          <span className="input-group-text border-0" id="search-addon">
+            <i className="fas fa-search"></i>
+          </span>
+        </div>
+      </div>
       <div className="card-body">
         <div className="row">
           <button className="btn btn-primary" onClick={this.addDweller}> Add

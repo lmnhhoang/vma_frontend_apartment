@@ -5,7 +5,9 @@ class ApartmentService {
   getAllApartment() {
     return http.get('/listAll');
   }
-
+  getApartmentWithPaging(params){
+    return http.get('/getApartment',{params});
+  }
   getAllApartmentinBuilding(building_id) {
     return http.get(`/listApartment?building=${building_id}`);
   }
